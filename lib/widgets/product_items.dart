@@ -23,10 +23,11 @@ class ProductItem extends StatelessWidget {
             height: 50,
             width: double.infinity,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: Colors.grey
+                borderRadius: BorderRadius.circular(6.0), color: Colors.grey),
+            child: Icon(
+              Icons.account_box_outlined,
+              size: 300,
             ),
-            child: Icon(Icons.account_box_outlined, size: 300,),
           ),
           footer: GridTileBar(
             leading: Consumer<Product>(
@@ -45,6 +46,21 @@ class ProductItem extends StatelessWidget {
               ),
               onPressed: () {
                 cart.addItem(product.id, product.price, product.title);
+                Scaffold.of(context).hideCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      "Item added to cart",
+                    ),
+                    duration: Duration(seconds: 2),
+                    action: SnackBarAction(
+                      onPressed: (){
+                        cart.removeSingleItem(product.id);
+                      },
+                      label: "UNDO",
+                    ),
+                  ),
+                );
               },
             ),
             backgroundColor: Colors.black87,

@@ -25,7 +25,7 @@ class Cart with ChangeNotifier {
 
   double get totalAmount {
     double total = 0.0;
-    if(_items != null && _items.length > 0){
+    if (_items != null && _items.length > 0) {
       _items.forEach((key, cartData) {
         total += cartData.price * cartData.quantity;
       });
@@ -49,19 +49,36 @@ class Cart with ChangeNotifier {
               id: DateTime.now().microsecond.toString(),
               price: price,
               title: title,
-            quantity: 1
-          ));
+              quantity: 1));
     }
     notifyListeners();
   }
 
-  void clear(){
+  void clear() {
     _items = {};
     notifyListeners();
   }
 
-  void removeItem(String productId){
+  void removeItem(String productId) {
     _items.remove(productId);
+    notifyListeners();
+  }
+
+  void removeSingleItem(String productId) {
+    if (!_items.containsKey(productId)) {
+      return;
+    }
+    if (_items[productId].quantity > 1) {
+      _items.update(
+          productId,
+          (existingProduct) => CartItem(
+              id: existingProduct.id,
+              title: existingProduct.title,
+              quantity: existingProduct.quantity - 1,
+              price: existingProduct.price));
+    } else {
+      _items.remove(productId);
+    }
     notifyListeners();
   }
 }
