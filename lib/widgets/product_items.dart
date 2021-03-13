@@ -18,13 +18,15 @@ class ProductItem extends StatelessWidget {
         },
         child: GridTile(
           child: Container(
-            height: 200,
-            width: 200,
-            padding: EdgeInsets.all(12),
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: 50,
+            width: double.infinity,
             decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(6.0),
+                color: Colors.grey
             ),
-            child: Text(product.title.substring(0, 1), textAlign: TextAlign.center,style: Theme.of(context).textTheme.headline4,),
+            child: Icon(Icons.account_box_outlined, size: 300,),
           ),
           footer: GridTileBar(
             leading: Consumer<Product>(
