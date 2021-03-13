@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop/providers/order.dart' show Order;
-import 'package:online_shop/widgets/order_item.dart';
 import 'package:provider/provider.dart';
+
+import '../providers/order.dart' show Order;
+import '../widgets/app_drawer.dart';
+import '../widgets/order_item.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
  static const routeName = "/order-details-screen";
@@ -10,6 +12,7 @@ class OrderDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderData = Provider.of<Order>(context);
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(title: Text("Order Summary"),),
       body: SafeArea(
         child: ListView.builder(

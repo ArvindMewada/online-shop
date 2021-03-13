@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:online_shop/providers/cart.dart';
-import 'package:online_shop/widgets/badge.dart';
-import 'package:online_shop/widgets/product_grid.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '../providers/cart.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/badge.dart';
+import '../widgets/product_grid.dart';
 import '../screens/cart_item_screen.dart';
 
 enum FilterOptions { Favorites, All }
@@ -61,6 +62,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: SafeArea(
         child: ProductGrid(_showOnlyFavorite),
       ),
