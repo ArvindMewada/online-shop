@@ -1,27 +1,73 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:online_shop/providers/order.dart' as ord;
-import 'package:online_shop/screens/orders_screen.dart';
 
-class OrderItem extends StatelessWidget {
+import '../providers/order.dart' as ord;
+
+class OrderItem extends StatefulWidget {
   final ord.OrderItem orderItem;
 
   OrderItem(this.orderItem);
 
   @override
+  _OrderItemState createState() => _OrderItemState();
+}
+
+class _OrderItemState extends State<OrderItem> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        title: Text("${orderItem.amount}"),
-        subtitle: Text(DateFormat('dd MM yyyy hh:mm').format(orderItem.dateTime)),
-        trailing: IconButton(
-          onPressed: (){
-            Navigator.of(context).pushNamed(OrderScreen.routeName);
-          },
-          icon: Icon(Icons.expand_more),
-        ),
+      margin: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text("${widget.orderItem.amount}"),
+            subtitle: Text(DateFormat('dd MM yyyy hh:mm')
+                .format(widget.orderItem.dateTime)),
+            trailing: IconButton(
+              onPressed: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+              icon: _isExpanded
+                  ? Icon(Icons.expand_less)
+                  : Icon(Icons.expand_more),
+            ),
+          ),
+          if (_isExpanded)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              height: min(widget.orderItem.products.length * 10.0 + 100, 120),
+              child: ListView(
+                children: widget.orderItem.products
+                    .map((prod) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              prod.title,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "${prod.quantity} X ${prod.price}",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal),
+                            )
+                          ],
+                        ))
+                    .toList(),
+              ),
+            ),
+        ],
       ),
-
     );
   }
 }
