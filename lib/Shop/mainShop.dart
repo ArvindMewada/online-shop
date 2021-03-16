@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'helper/CustomRoute.dart';
 import 'providers/cart.dart';
 import 'providers/order.dart';
 import 'providers/products.dart';
@@ -28,6 +29,12 @@ class MyAppShop extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android : CustomPageTransitionBuilder(),
+              TargetPlatform.iOS : CustomPageTransitionBuilder()
+            }
+          )
         ),
         home: ProductOverviewScreen(),
         routes: {
