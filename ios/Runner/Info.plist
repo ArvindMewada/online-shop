@@ -40,6 +40,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Privacy - Photo Library Usage Description in the visual edito</String>
+	<key>NSCameraUsageDescription</key>
+	<string>Privacy - CameraUsage Description in the visual editor </String>
 	<false/>
 </dict>
 </plist>

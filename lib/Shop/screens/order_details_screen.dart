@@ -6,7 +6,7 @@ import '../widgets/app_drawer.dart';
 import '../widgets/order_item.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
- static const routeName = "/order-details-screen";
+ static const routeName = "/order-details-NativeFunction.screen";
 
   @override
   Widget build(BuildContext context) {
